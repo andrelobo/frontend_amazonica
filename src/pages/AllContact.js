@@ -36,7 +36,7 @@ const AllContact = () => {
   }, []);
 
   const deleteContact = async (id) => {
-    if (window.confirm("are you sure you want to delete this contact ?")) {
+    if (window.confirm("Você tem certeza que quer deletar esse contato ?")) {
       try {
         const res = await fetch(`http://localhost:7777/api/delete/${id}`, {
           method: "DELETE",
@@ -81,7 +81,7 @@ const AllContact = () => {
         ) : (
           <>
             {contacts.length == 0 ? (
-              <h3>No contacts created yet</h3>
+              <h3>Sem Contatos criados ainda</h3>
             ) : (
               <>
                 <form className="d-flex" onSubmit={handleSearchSubmit}>

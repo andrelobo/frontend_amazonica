@@ -15,13 +15,34 @@ const EditContact = () => {
     name: "",
     address: "",
     email: "",
+    endereco: "",
+    bairro: "",
+    cpf: "",
+    forma_pagamento: "",
+    prescricao: "",
+    codigo_armacao: "",
+    codigo_lente: "",
+    compras: [
+      {
+        valor_total: 0,
+        quantidade_parcelas: 0,
+        parcelas: [
+          {
+            numero: 0,
+            valor: 0,
+            data_vencimento: "",
+            status: "pendente",
+          },
+        ],
+      },
+    ],
+    preco: 0,
     phone: "",
   });
   const [loading, setLoading] = useState(false);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-
     setUserDetails({ ...userDetails, [name]: value });
   };
 
@@ -38,9 +59,37 @@ const EditContact = () => {
     });
     const result = await res.json();
     if (!result.error) {
-      toast.success(`updated [${userDetails.name}] contact`);
+      toast.success(`Updated [${userDetails.name}] contact`);
 
-      setUserDetails({ name: "", address: "", email: "", phone: "" });
+      setUserDetails({
+        name: "",
+        address: "",
+        email: "",
+        endereco: "",
+        bairro: "",
+        cpf: "",
+        forma_pagamento: "",
+        prescricao: "",
+        codigo_armacao: "",
+        codigo_lente: "",
+        compras: [
+          {
+            valor_total: 0,
+            quantidade_parcelas: 0,
+            parcelas: [
+              {
+                numero: 0,
+                valor: 0,
+                data_vencimento: "",
+                status: "pendente",
+              },
+            ],
+          },
+        ],
+        preco: 0,
+        phone: "",
+      });
+
       navigate("/mycontacts");
     } else {
       toast.error(result.error);
@@ -58,10 +107,47 @@ const EditContact = () => {
       });
       const result = await res.json();
       setUserDetails({
-        name: result.name,
-        email: result.email,
-        address: result.address,
-        phone: result.phone,
+        name: result.name || "",
+        email: result.email || "",
+        address: result.address || "",
+        phone: result.phone || "",
+        endereco: result.endereco || "",
+        bairro: result.bairro || "",
+        cpf: result.cpf || "",
+        forma_pagamento: result.forma_pagamento || "",
+        prescricao: result.prescricao || "",
+        codigo_armacao: result.codigo_armacao || "",
+        codigo_lente: result.codigo_lente || "",
+        compras: result.compras
+          ? [
+              {
+                valor_total: result.compras[0]?.valor_total || 0,
+                quantidade_parcelas: result.compras[0]?.quantidade_parcelas || 0,
+                parcelas: [
+                  {
+                    numero: result.compras[0]?.parcelas[0]?.numero || 0,
+                    valor: result.compras[0]?.parcelas[0]?.valor || 0,
+                    data_vencimento: result.compras[0]?.parcelas[0]?.data_vencimento || "",
+                    status: result.compras[0]?.parcelas[0]?.status || "pendente",
+                  },
+                ],
+              },
+            ]
+          : [
+              {
+                valor_total: 0,
+                quantidade_parcelas: 0,
+                parcelas: [
+                  {
+                    numero: 0,
+                    valor: 0,
+                    data_vencimento: "",
+                    status: "pendente",
+                  },
+                ],
+              },
+            ],
+        preco: result.preco || 0,
       });
       setLoading(false);
     } catch (err) {
@@ -138,11 +224,171 @@ const EditContact = () => {
                 required
               />
             </div>
-            <input
-              type="submit"
-              value="Save Changes"
-              className="btn btn-info my-2"
-            />
+
+            {/* Campos adicionais do formulário */}
+            <div className="form-group">
+              <label htmlFor="enderecoInput" className="form-label mt-4">
+                Endereco
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="enderecoInput"
+                name="endereco"
+                value={userDetails.endereco}
+                onChange={handleInputChange}
+                placeholder="Endereco"
+                required
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="bairroInput" className="form-label mt-4">
+                Bairro
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="bairroInput"
+                name="bairro"
+                value={userDetails.bairro}
+                onChange={handleInputChange}
+                placeholder="Bairro"
+                required
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="cpfInput" className="form-label mt-4">
+                CPF
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="cpfInput"
+                name="cpf"
+                value={userDetails.cpf}
+                onChange={handleInputChange}
+                placeholder="CPF"
+                required
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="formaPagamentoInput" className="form-label mt-4">
+                Forma de Pagamento
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="formaPagamentoInput"
+                name="forma_pagamento"
+                value={userDetails.forma_pagamento}
+                onChange={handleInputChange}
+                placeholder="Forma de Pagamento"
+                required
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="prescricaoInput" className="form-label mt-4">
+                Prescricao
+              </label>
+              <textarea
+                className="form-control"
+                id="prescricaoInput"
+                name="prescricao"
+                value={userDetails.prescricao}
+                onChange={handleInputChange}
+                placeholder="Prescricao"
+                required
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="codigoArmacaoInput" className="form-label mt-4">
+                Codigo Armacao
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="codigoArmacaoInput"
+                name="codigo_armacao"
+                value={userDetails.codigo_armacao}
+                onChange={handleInputChange}
+                placeholder="Codigo Armacao"
+                required
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="codigoLenteInput" className="form-label mt-4">
+                Codigo Lente
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="codigoLenteInput"
+                name="codigo_lente"
+                value={userDetails.codigo_lente}
+                onChange={handleInputChange}
+                placeholder="Codigo Lente"
+                required
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="comprasInput" className="form-label mt-4">
+                Valor Total de Compras
+              </label>
+              <input
+                type="number"
+                className="form-control"
+                id="comprasInput"
+                name="compras"
+                value={userDetails.compras && userDetails.compras[0] ? userDetails.compras[0].valor_total : 0}
+                onChange={(e) =>
+                  setUserDetails({
+                    ...userDetails,
+                    compras: [
+                      {
+                        ...userDetails.compras[0],
+                        valor_total: e.target.value,
+                      },
+                    ],
+                  })
+                }
+                placeholder="0"
+                required
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="quantidadeParcelasInput" className="form-label mt-4">
+                Quantidade de Parcelas
+              </label>
+              <input
+                type="number"
+                className="form-control"
+                id="quantidadeParcelasInput"
+                name="quantidade_parcelas"
+                value={userDetails.compras && userDetails.compras[0] ? userDetails.compras[0].quantidade_parcelas : 0}
+                onChange={(e) =>
+                  setUserDetails({
+                    ...userDetails,
+                    compras: [
+                      {
+                        ...userDetails.compras[0],
+                        quantidade_parcelas: e.target.value,
+                      },
+                    ],
+                  })
+                }
+                placeholder="0"
+                required  
+              />
+            </div>
+            <input type="submit" value="Save Changes" className="btn btn-info my-2" />
           </form>
         </>
       )}

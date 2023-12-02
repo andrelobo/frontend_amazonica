@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 import ToastContext from "../context/ToastContext";
 
-const Navbar = ({ title = "CMS" }) => {
+const Navbar = ({ title = "Ótica Amazônia" }) => {
   const navigate = useNavigate();
   const { user, setUser } = useContext(AuthContext);
   const { toast } = useContext(ToastContext);
@@ -33,12 +33,12 @@ const Navbar = ({ title = "CMS" }) => {
               <>
                 <li className="nav-item">
                   <Link to="/mycontacts">
-                    <a className="nav-link">All Contacts</a>
+                    <a className="nav-link">Todos os Contatos</a>
                   </Link>
                 </li>
                 <li className="nav-item">
                   <Link to="/create">
-                    <a className="nav-link">Create</a>
+                    <a className="nav-link">Criar</a>
                   </Link>
                 </li>
                 <li
@@ -50,7 +50,7 @@ const Navbar = ({ title = "CMS" }) => {
                     navigate("/login", { replace: true });
                   }}
                 >
-                  <button className="btn btn-danger">Logout</button>
+                  <button className="btn btn-danger">Sair</button>
                 </li>
               </>
             ) : (
@@ -62,7 +62,7 @@ const Navbar = ({ title = "CMS" }) => {
                 </li>
                 <li className="nav-item">
                   <Link to="/register">
-                    <a className="nav-link">Register</a>
+                    <a className="nav-link">Registrar</a>
                   </Link>
                 </li>
               </>

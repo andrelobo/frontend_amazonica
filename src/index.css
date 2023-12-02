@@ -1,4 +1,7 @@
+/* index.css */
+
 body {
+
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -10,4 +13,28 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+/* Estilos para a barra de navegação (navbar) */
+.navbarColor01{
+  background-color: #28a745; /* Cor verde */
+  padding: 10px; /* Espaçamento interno */
+  border-radius: 10px; /* Borda arredondada */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fonte */
+  color: #ffffff; /* Cor do texto */
+  /* Outros estilos desejados para a barra de navegação */
+}
+
+/* Estilo para links na barra de navegação */
+.navbar a {
+  color: #ffffff; /* Cor do texto do link */
+  margin-right: 15px; /* Espaçamento entre os links (ajuste conforme necessário) */
+  text-decoration: none; /* Remover sublinhado dos links */
+  font-weight: bold; /* Negrito */
+  font-size: 16px; /* Tamanho da fonte */
+}
+
+/* Estilo para links na barra de navegação quando hover (passar o mouse por cima) */
+.navbar a:hover {
+  text-decoration: underline; /* Adicionar sublinhado ao passar o mouse por cima */
 }

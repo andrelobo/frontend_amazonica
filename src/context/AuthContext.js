@@ -86,7 +86,7 @@ export const AuthContextProvider = ({ children }) => {
       const result = await res.json();
 
       if (!result.error) {
-        toast.success("user registered successfully! login into your account!");
+        toast.success("Usuário registrado com sucesso! Faça login na sua conta!");
         navigate("/login", { replace: true });
       } else {
         toast.error(result.error);
